@@ -39,6 +39,12 @@ window.addEventListener("keydown", e => {
         points.forEach(p => p.dist += 0.1);
     }
 });
+/**
+ * Will connect two 3d Points with a line
+ * @param p1 The first point
+ * @param p2 The second point
+ * @param ctx The cavas context to draw the connection on
+ */
 const connect = (p1, p2, ctx) => {
     ctx.strokeStyle = "#fff";
     ctx.beginPath();

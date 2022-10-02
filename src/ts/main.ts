@@ -41,6 +41,12 @@ window.addEventListener("keydown", e => {
   }
 })
 
+/**
+ * Will connect two 3d Points with a line
+ * @param p1 The first point
+ * @param p2 The second point
+ * @param ctx The cavas context to draw the connection on
+ */
 const connect = (p1: Vector3d, p2: Vector3d, ctx: CanvasRenderingContext2D) => {
   ctx.strokeStyle = "#fff";
   ctx.beginPath();

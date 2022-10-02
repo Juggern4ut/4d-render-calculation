@@ -12,6 +12,10 @@ export default class Vector3d extends Vector2d {
     this.update2DCoordinates();
   }
 
+  /**
+   * Will rotate the point around the x-axis
+   * @param angle The angle to rotate in radians
+   */
   rotateX(angle: number) {
     const m = new Matrix([
       [1, 0, 0],
@@ -26,7 +30,10 @@ export default class Vector3d extends Vector2d {
 
     this.update2DCoordinates();
   }
-
+  /**
+   * Will rotate the point around the y-axis
+   * @param angle The angle to rotate in radians
+   */
   rotateY(angle: number) {
     const m = new Matrix([
       [Math.cos(angle), 0, -Math.sin(angle)],
@@ -44,7 +51,7 @@ export default class Vector3d extends Vector2d {
 
   /**
    * Will rotate the point around the z-axis
-   * @param angle The angle to rotate
+   * @param angle The angle to rotate in radians
    */
   rotateZ(angle: number) {
     const m = new Matrix([
@@ -54,7 +61,6 @@ export default class Vector3d extends Vector2d {
     ]);
 
     const calc = m.multVector3D(this);
-
     this.x = calc.x;
     this.y = calc.y;
     this.z = calc.z;
@@ -63,7 +69,7 @@ export default class Vector3d extends Vector2d {
   }
 
   /**
-   * CAlculate the visual re
+   * Calculate the visual position of the 3d Vector in a 2d Space
    * @returns An object containing the x and y points mapped on a 2d plane
    */
   update2DCoordinates() {
