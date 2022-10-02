@@ -4,10 +4,117 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="./js/main.js" defer ></script>
+    <title>Hypercube</title>
+    <script src="./js/main.js" defer></script>
+    <link rel="stylesheet" href="./css/main.css" />
   </head>
-  <body style="background-color: #222">
-    <canvas id="canvas" width="500" height="500"></canvas>
+  <body>
+    <main>
+      <section>
+        <h1>Hypercube</h1>
+        <h2>How to render a Tesseract on a 2D Canvas</h2>
+      </section>
+
+      <section>
+        <p>
+          Using vanilla TypeScript and some basic math we can calculate how to
+          render a four dimensional shape on a two dimensional plane.
+        </p>
+        <p>Below you can see a live version of the code running:</p>
+      </section>
+
+      <div style="background-color: #444">
+        <canvas id="canvas" width="500" height="500"></canvas>
+      </div>
+
+      <section>
+        <h2>1. Create a 4D Vector</h2>
+        <p>
+          For the first step we create a new class called "Vector4D" which holds
+          the four numbers for x,y,z and the fourth dimension which we'll call w
+          here, aswell as two properties called "planeX" and "planeY" which will
+          represent the 2d coordinates of where the vector will be located on
+          the plane.
+        </p>
+
+        <h3>1.1 Project the vector onto 2D</h3>
+        <p>
+          Using a really simple projection formula, we can calculate the planeX
+          and planeY properties using the following formula:
+        </p>
+        <code>
+          const dist = 2;<br />
+          const w = 1 / (this.dist - this.w);<br />
+          this.planeX = this.x * w;<br />
+          this.planeY = this.y * w;
+        </code>
+
+        <h3>1.2 Create rotation-methods</h3>
+        <p>
+          Next we add a method that rotates a vector by a given angle, to
+          achieve this, we use calculate dot-product of a rotation-matrix and
+          the vector points.
+        </p>
+
+        <p>
+          The rotation matrix to rotate around the y-axis for example, looks
+          like this:
+        </p>
+        <code>
+          [cos(θ), 0, -sin(θ), 0]<br />
+          [0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          1,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0, 0]<br />
+          [sin(θ), 0, &nbsp;cos(θ), 0]<br />
+          [0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0, 1]<br />
+        </code>
+        <p>Where θ is the angle in radians.</p>
+
+        <p>
+          Multiply the matrix with the coordinates of the vector and update them
+          accordingly. Also call the projection method again, so the planeX and
+          planeY will be updated aswell.
+        </p>
+      </section>
+
+      <section>
+        <h2>2. Create the vectors for all vectors</h2>
+        <p>
+          A tesseract is made out of 16 vectors so we create a vector for each
+          one. These are their coordinates:
+        </p>
+        <code>
+          [-1, -1, -1, -1]<br />
+          [1, -1, -1, -1]<br />
+          [1, 1, -1, -1]<br />
+          [-1, 1, -1, -1]<br />
+          [-1, -1, 1, -1]<br />
+          [1, -1, 1, -1]<br />
+          [1, 1, 1, -1]<br />
+          [-1, 1, 1, -1]<br />
+          [-1, -1, -1, 1]<br />
+          [1, -1, -1, 1]<br />
+          [1, 1, -1, 1]<br />
+          [-1, 1, -1, 1]<br />
+          [-1, -1, 1, 1]<br />
+          [1, -1, 1, 1]<br />
+          [1, 1, 1, 1]<br />
+          [-1, 1, 1, 1]<br />
+        </code>
+        <p>As you may have noticed, these are all the possible combinations.</p>
+      </section>
+
+      <section>
+        <h2>Draw the vectors and rotate them at will</h2>
+        <p>
+          Now all we have to do is looping through all our vectors, getting
+          their planeX and planeY and draw it to the canvas.
+        </p>
+        <p>
+          We can now also call the rotate methods that multiply the coordinates
+          of the vector with the rotation-matrix
+        </p>
+      </section>
+    </main>
   </body>
 </html>

@@ -52,6 +52,11 @@ const update = () => {
     });
 };
 window.addEventListener("keydown", (e) => {
+    if (e.key == "q") {
+        points.forEach((p) => {
+            p.rotateZW(0.1);
+        });
+    }
     if (e.key === "i") {
         points.forEach((p) => (p.dist -= 0.1));
     }
