@@ -3,41 +3,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const Matrix_1 = require("./Matrix");
 const Vector2d_1 = __importDefault(require("./Vector2d"));
 class Vector3d extends Vector2d_1.default {
     constructor(x = 0, y = 0, z = 0) {
         super(x, y);
         this.planeX = 0;
         this.planeY = 0;
+        this.dist = 5;
         this.z = z;
         this.update2DCoordinates();
     }
     rotateX(angle) {
-        const matrix = [
+        const m = new Matrix_1.Matrix([
             [1, 0, 0],
             [0, Math.cos(angle), -Math.sin(angle)],
             [0, Math.sin(angle), Math.cos(angle)],
-        ];
-        let tmpx = this.x * matrix[0][0] + this.y * matrix[0][1] + this.z * matrix[0][2];
-        let tmpy = this.x * matrix[1][0] + this.y * matrix[1][1] + this.z * matrix[1][2];
-        let tmpz = this.x * matrix[2][0] + this.y * matrix[2][1] + this.z * matrix[2][2];
-        this.x = tmpx;
-        this.y = tmpy;
-        this.z = tmpz;
+        ]);
+        let calc = m.multVector3D(this);
+        this.x = calc.x;
+        this.y = calc.y;
+        this.z = calc.z;
         this.update2DCoordinates();
     }
     rotateY(angle) {
-        const matrix = [
+        const m = new Matrix_1.Matrix([
             [Math.cos(angle), 0, -Math.sin(angle)],
             [0, 1, 0],
             [Math.sin(angle), 0, Math.cos(angle)],
-        ];
-        let tmpx = this.x * matrix[0][0] + this.y * matrix[0][1] + this.z * matrix[0][2];
-        let tmpy = this.x * matrix[1][0] + this.y * matrix[1][1] + this.z * matrix[1][2];
-        let tmpz = this.x * matrix[2][0] + this.y * matrix[2][1] + this.z * matrix[2][2];
-        this.x = tmpx;
-        this.y = tmpy;
-        this.z = tmpz;
+        ]);
+        let calc = m.multVector3D(this);
+        this.x = calc.x;
+        this.y = calc.y;
+        this.z = calc.z;
         this.update2DCoordinates();
     }
     /**
@@ -45,17 +43,15 @@ class Vector3d extends Vector2d_1.default {
      * @param angle The angle to rotate
      */
     rotateZ(angle) {
-        const matrix = [
+        const m = new Matrix_1.Matrix([
             [Math.cos(angle), -Math.sin(angle), 0],
             [Math.sin(angle), Math.cos(angle), 0],
             [0, 0, 1],
-        ];
-        let tmpx = this.x * matrix[0][0] + this.y * matrix[0][1] + this.z * matrix[0][2];
-        let tmpy = this.x * matrix[1][0] + this.y * matrix[1][1] + this.z * matrix[1][2];
-        let tmpz = this.x * matrix[2][0] + this.y * matrix[2][1] + this.z * matrix[2][2];
-        this.x = tmpx;
-        this.y = tmpy;
-        this.z = tmpz;
+        ]);
+        const calc = m.multVector3D(this);
+        this.x = calc.x;
+        this.y = calc.y;
+        this.z = calc.z;
         this.update2DCoordinates();
     }
     /**
@@ -63,10 +59,9 @@ class Vector3d extends Vector2d_1.default {
      * @returns An object containing the x and y points mapped on a 2d plane
      */
     update2DCoordinates() {
-        const dist = 5;
         const factor = 200;
         //const w = 1;
-        const w = 1 / (dist - this.z);
+        const w = 1 / (this.dist - this.z);
         this.planeX = this.x * factor * w + 250;
         this.planeY = this.y * factor * w + 250;
     }
