@@ -44,9 +44,16 @@
         </p>
         <code>
           const dist = 2;<br />
-          const w = 1 / (this.dist - this.w);<br />
-          this.planeX = this.x * w;<br />
-          this.planeY = this.y * w;
+          const w = 1 / (dist - this.w);<br />
+          const projection3D = {<br />
+            x: this.x * w,<br />
+            y: this.y * w,<br />
+            z: this.z * w<br />
+          }<br />
+
+          const w2 = 1 (dist - this.z);<br />
+          this.planeX = projection3D.x * w2;<br />
+          this.planeY = projection3D.y * w2;
         </code>
 
         <h3>1.2 Create rotation-methods</h3>

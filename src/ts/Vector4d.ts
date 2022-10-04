@@ -8,7 +8,7 @@ export default class Vector4d extends Vector3d {
     super(x, y, z);
     this.w = w;
     this.dist = 4;
-    this.factor = 200;
+    this.factor = 1000;
   }
 
   /**
@@ -98,7 +98,16 @@ export default class Vector4d extends Vector3d {
   update2DCoordinates() {
     //const w = 1;
     const w = 1 / (this.dist - this.w);
-    this.planeX = this.x * this.factor * w + 250;
-    this.planeY = this.y * this.factor * w + 250;
+
+    const projection3D = {
+      x: this.x * w,
+      y: this.y * w,
+      z: this.z * w,
+    };
+
+    const w2 = 1 / (this.dist - this.z);
+
+    this.planeX = projection3D.x * this.factor * w2 + 250;
+    this.planeY = projection3D.y * this.factor * w2 + 250;
   }
 }
