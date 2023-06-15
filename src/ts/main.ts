@@ -4,6 +4,11 @@ import Vector4d from "./Vector4d";
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
+const checkboxRotateX = document.getElementById("rotateX") as HTMLInputElement;
+const checkboxRotateY = document.getElementById("rotateY") as HTMLInputElement;
+const checkboxRotateZ = document.getElementById("rotateZ") as HTMLInputElement;
+const checkboxRotateW = document.getElementById("rotateW") as HTMLInputElement;
+
 const width = canvas.width;
 const height = canvas.height;
 
@@ -51,15 +56,26 @@ const update = () => {
   connect(points[15], points[12], ctx, "#f00");
 
   points.forEach((p) => {
-    //p.rotateXW(0.1);
-    p.rotateXZ(0.1);
-    p.rotateZW(0.1);
+    if (checkboxRotateX.checked) {
+      p.rotateXW(0.1); //x
+    }
+
+    if (checkboxRotateY.checked) {
+      p.rotateZW(0.1); //y
+    }
+
+    if (checkboxRotateZ.checked) {
+      p.rotateXY(0.1); //z
+    }
+
+    if (checkboxRotateW.checked) {
+      p.rotateXZ(0.1); //w
+    }
   });
 };
 
 window.addEventListener("keydown", (e) => {
-  
-  if(e.key == "q"){
+  if (e.key == "q") {
     points.forEach((p) => {
       p.rotateZW(0.1);
     });
@@ -78,12 +94,7 @@ window.addEventListener("keydown", (e) => {
  * @param p2 The second point
  * @param ctx The cavas context to draw the connection on
  */
-const connect = (
-  p1: Vector3d,
-  p2: Vector3d,
-  ctx: CanvasRenderingContext2D,
-  color?: string
-) => {
+const connect = (p1: Vector3d, p2: Vector3d, ctx: CanvasRenderingContext2D, color?: string) => {
   ctx.strokeStyle = color || "#fff";
   ctx.beginPath();
   ctx.moveTo(p1.planeX, p1.planeY);

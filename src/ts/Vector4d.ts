@@ -74,6 +74,10 @@ export default class Vector4d extends Vector3d {
     this.update2DCoordinates();
   }
 
+  /**
+   * Will rotate the point around the y-axis
+   * @param angle The angle to rotate in radians
+   */
   rotateZW(angle: number) {
     const m = new Matrix([
       [1, 0, 0, 0],

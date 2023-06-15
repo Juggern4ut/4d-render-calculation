@@ -30,6 +30,7 @@ export default class Vector3d extends Vector2d {
 
     this.update2DCoordinates();
   }
+  
   /**
    * Will rotate the point around the y-axis
    * @param angle The angle to rotate in radians

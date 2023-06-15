@@ -1,6 +1,28 @@
 body {
+  max-width: 602px;
+  margin: 0 auto;
   color: #454545;
-  font-family: Open Sans, Arial;
+  width: calc(100% - 20px);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Open Sans", Arial;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 18.72px;
 }
 
 main {
@@ -9,12 +31,35 @@ main {
   text-align: center;
 }
 
+a {
+  text-decoration: none;
+  color: #07a;
+}
+
 canvas {
   background-color: #454545;
 }
 
 section {
   text-align: left;
+}
+
+.controls {
+  display: flex;
+}
+.controls > div {
+  flex-grow: 1;
+  display: flex;
+  background-color: rgb(53, 53, 53);
+  color: #fff;
+}
+.controls > div:not(:last-of-type) {
+  border-right: 1px solid #fff;
+}
+.controls > div > label {
+  flex-grow: 1;
+  padding: 10px;
+  text-align: center;
 }
 
 /*# sourceMappingURL=main.css.map */

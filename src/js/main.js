@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Vector4d_1 = __importDefault(require("./Vector4d"));
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const checkboxRotateX = document.getElementById("rotateX");
+const checkboxRotateY = document.getElementById("rotateY");
+const checkboxRotateZ = document.getElementById("rotateZ");
+const checkboxRotateW = document.getElementById("rotateW");
 const width = canvas.width;
 const height = canvas.height;
 const points = [
@@ -46,9 +50,18 @@ const update = () => {
     connect(points[11], points[8], ctx, "#f00");
     connect(points[15], points[12], ctx, "#f00");
     points.forEach((p) => {
-        //p.rotateXW(0.1);
-        p.rotateXZ(0.1);
-        p.rotateZW(0.1);
+        if (checkboxRotateX.checked) {
+            p.rotateXW(0.1); //x
+        }
+        if (checkboxRotateY.checked) {
+            p.rotateZW(0.1); //y
+        }
+        if (checkboxRotateZ.checked) {
+            p.rotateXY(0.1); //z
+        }
+        if (checkboxRotateW.checked) {
+            p.rotateXZ(0.1); //w
+        }
     });
 };
 window.addEventListener("keydown", (e) => {
